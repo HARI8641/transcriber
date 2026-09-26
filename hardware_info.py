@@ -45,6 +45,9 @@ if gpus:
 else:
     rows.append(("GPU", "Status", "No NVIDIA GPU detected via GPUtil"))
 
+
+
+
 # 6. Render Table
 print(f"{'Component':<10} | {'Metric':<22} | {'Value'}")
 print("-" * 65)
