@@ -2,12 +2,17 @@ import platform
 import cpuinfo
 import psutil
 import GPUtil
+import sys 
+
 
 def to_gb(num_bytes):
     return f"{num_bytes / (1024 ** 3):.2f} GB"
 
 # 1. System / OS Info
 os_name = f"{platform.system()} {platform.release()} ({platform.architecture()[0]})"
+
+# 1.1 python info
+py_version = sys.version
 
 # 2. CPU Metrics
 cpu = cpuinfo.get_cpu_info()
@@ -25,6 +30,7 @@ gpus = GPUtil.getGPUs()
 # 5. Build Table Rows
 rows = [
     ("OS", "Platform", os_name),
+    ("Py", "Interpretor", py_version),
     ("CPU", "Model", cpu.get("brand_raw", "Unknown")),
     ("CPU", "Architecture", f"{cpu.get('arch', 'N/A')} ({cpu.get('bits', '')}-bit)"),
     ("CPU", "Clock (Base / Live)", f"{cpu.get('hz_advertised_friendly', 'N/A')} / {freq.current:.0f} MHz" if freq else "N/A"),
